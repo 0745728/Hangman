@@ -4,7 +4,7 @@
 const wordsList = ["coco", "beauty and the beast", "frozen"];
 
 // Solutions will held here
-let choseWord = "";
+let chosenWord = "";
 
 
 // This will break the solutions into individual letters to be stored in an array.
@@ -64,7 +64,7 @@ function startGame() {
         document.getElementById("guesses-left").innerHTML = numGuesses;
 
         // Prints the blanks at the begining of each round in the Html
-        document.getElementById("word-blank").innerHTML = blankAndSuccesses.join(" ");
+        document.getElementById("word-blanks").innerHTML = blankAndSuccesses.join(" ");
 
         // Clears the wrong guesses from thr previous round
         document.getElementById("wrong-guesses").innerHTML = wrongGuesses.join(" ");
@@ -73,7 +73,7 @@ function startGame() {
 }
 
 // It's where we will do all of the comparisons for matches
-function checkletters(letter) {
+function checkLetters(letter) {
 
     //This bolean will be taggled based on whether or not a user letter is found
     var letterInWord = false;
@@ -157,3 +157,23 @@ function roundComplete(){
 
     }
 }
+
+// MAIN PROCCESS (This is the code that controls what is actually run)
+//- - - - - - - --  - -- - -  -- - -  - - - - --  - - - - -- - -
+
+// Starts Game
+startGame();
+
+// Then initiate the function for capturing key clicks
+document.onkeyup = function(event) {
+    
+    // Converts all key cliks to lowercase letters
+    var letterGuessed = String.fromCharCode(event.keyCode).toLowerCase ();
+
+    //Runs the code to check for corrections
+    checkLetters(letterGuessed);
+
+    //Runs the code after each round is done
+    roundComplete();
+
+};
